@@ -1,2 +1,1 @@
-# cheks
 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
