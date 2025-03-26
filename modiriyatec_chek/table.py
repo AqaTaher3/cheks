@@ -71,7 +71,7 @@ def filter_dataframe(df, search_entries):
     return filtered_df
 
 
-def handle_double_click(event, tree, df, conn):
+def handle_double_click(event, tree, df, conn, root):
     """رویداد ویرایش سلول در صورت دوبار کلیک"""
     item = tree.selection()[0]
     col_index = int(tree.identify_column(event.x).replace('#', '')) - 1
@@ -79,7 +79,7 @@ def handle_double_click(event, tree, df, conn):
     col_name = df.columns[col_index]
     current_value = tree.item(item, 'values')[col_index]
 
-    entry = tk.Entry(root)
+    entry = tk.Entry(root)  # Use root here
     entry.insert(0, current_value)
     entry.place(x=event.x_root - root.winfo_rootx(), y=event.y_root - root.winfo_rooty())
 

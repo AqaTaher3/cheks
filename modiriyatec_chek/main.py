@@ -1,4 +1,4 @@
-from exel_reading import reding_exel, making_panda
+from exel_reading import reding_exel, making_panda, remove_empty_rows
 from taking_backup import making_backup
 from sqlalchemy import create_engine
 from table import *
@@ -17,17 +17,18 @@ old_df = reding_exel(file_path)[1]
 dup_sayad = find_duplicate_sayads(old_data)
 dup_book = find_duplicate_pbook(old_data)
 
-# some chenges on df and making new table  ----
-new_data = 11111111111  # fix me
-new_df = 2222222222222  # fix me
+#-------------# some chenges on df and making new table  ----
+new_data = old_data.copy()  # You can modify this according to your needs
 
 # -------------  changing data format
 old_df['Date'] = pd.to_datetime(old_df['Date'], errors='coerce')
 old_df['Date'] = old_df['Date'].dt.date
 
-pands = making_panda(old_df, tabel_name)
+# ------------------- clean empty rows
+new_df = remove_empty_rows(old_df)
 
-#  ------------------------------------------------------
+#  -----------------------------------
+pands = making_panda(new_df, tabel_name)
 
 # شروع برنامه
 if __name__ == "__main__":
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     search_entries = setup_search_entries(root, df, lambda: load_data_to_tree(tree, filter_dataframe(df, search_entries)))
 
     # اتصال رویداد دوبار کلیک برای ویرایش
-    tree.bind("<Double-1>", lambda event: handle_double_click(event, tree, df, conn))
+    tree.bind("<Double-1>", lambda event: handle_double_click(event, tree, df, conn, root))
 
     # اجرای پنجره
     root.mainloop()
@@ -54,6 +55,8 @@ if __name__ == "__main__":
 
 # --------------- taking  backup -----------------------------------------
 making_backup(output_file_path, engine)
-# -----------  move some specific rows to another exel file
-# move_rows_between_tables(engine, source_table='my_table_1', target_table='my_table_2') !!!! fix me
+
+
+#-------
+
 

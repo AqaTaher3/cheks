@@ -19,7 +19,7 @@ def find_duplicate_sayads(data):
             else:
                 sayad_count[sayad] = 1
 
-    return list(duplicates)  # تبدیل set به لیست برای خروجی
+    print(duplicates)  # تبدیل set به لیست برای خروجی
 
 
 def find_duplicate_pbook(data):
@@ -40,7 +40,7 @@ def find_duplicate_pbook(data):
             else:
                 book_count[book] = 1
 
-    return list(duplicates)  # تبدیل set به لیست برای خروجی
+    print(duplicates)  # تبدیل set به لیست برای خروجی
 
 
 # not using for now

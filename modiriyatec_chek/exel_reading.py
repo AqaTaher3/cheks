@@ -19,3 +19,14 @@ def making_panda(df, tabel_name):
 
     # چاپ پیغام تایید
     print('tabel_dorost_shodesh')
+
+
+def remove_empty_rows(df):
+    """
+    حذف ردیف‌های کاملاً خالی از DataFrame
+    :param df: DataFrame ورودی
+    :return: DataFrame بدون ردیف‌های خالی
+    """
+    # حذف ردیف‌هایی که تمامی مقادیر آن‌ها خالی هستند
+    df_cleaned = df.dropna(how='all')
+    return df_cleaned
